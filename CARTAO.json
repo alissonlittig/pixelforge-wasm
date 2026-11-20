@@ -1,0 +1,12 @@
+{
+  "slug": "rust-wasm",
+  "titulo": { "pt": "PixelForge: compressor de imagens em Rust + WebAssembly", "en": "PixelForge: image compressor in Rust + WebAssembly" },
+  "descricao": {
+    "pt": "Comprime, redimensiona e converte várias imagens para JPG, PNG ou WebP direto no navegador, com slider antes/depois e download em zip. O motor é Rust compilado para WebAssembly e nenhuma imagem sai do aparelho.",
+    "en": "Compresses, resizes and converts batches of images to JPG, PNG or WebP right in the browser, with a before/after slider and zip download. The engine is Rust compiled to WebAssembly and no image ever leaves the device."
+  },
+  "stack": ["Rust", "WebAssembly", "wasm-bindgen", "wasm-pack", "JavaScript", "CSS", "GitHub Pages"],
+  "link_demo": "https://alissonlittig.github.io/pixelforge-wasm/",
+  "link_repo": "https://github.com/alissonlittig/pixelforge-wasm",
+  "capa": "C:\\gerente\\03_PORTFOLIO\\novos\\rust-wasm\\assets\\cover.png"
+}

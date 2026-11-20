@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PixelForge — private image compressor (Rust + WebAssembly)</title>
+<meta name="description" content="Compress, resize and convert images to JPG, PNG or WebP. Rust compiled to WebAssembly, runs entirely in your browser. Nothing is uploaded.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f97316'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo" aria-hidden="true">P</span> PixelForge</div>
+  <div class="lock" title="Files never leave your device"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg> 100% local · nothing uploaded</div>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="eyebrow">Rust · WebAssembly</p>
+    <h1>Shrink images without<br>handing them to anyone.</h1>
+    <p class="sub">Drop a batch, pick a format and size, compare before and after, download a zip. The whole engine runs on your device.</p>
+  </section>
+
+  <section class="panel controls" aria-label="Settings">
+    <div class="field">Format
+      <div class="seg" id="fmt" role="radiogroup" aria-label="Output format">
+        <button data-v="jpeg" class="on" role="radio" aria-checked="true">JPG</button>
+        <button data-v="webp" role="radio" aria-checked="false">WebP</button>
+        <button data-v="png" role="radio" aria-checked="false">PNG</button>
+      </div>
+    </div>
+    <label class="field">Quality <output id="qv">75</output>
+      <input id="quality" type="range" min="10" max="100" value="75">
+      <small>JPG only. PNG and WebP are lossless.</small>
+    </label>
+    <label class="field">Longest side
+      <select id="maxside">
+        <option value="0">Original size</option>
+        <option value="3840">3840 px</option>
+        <option value="2560">2560 px</option>
+        <option value="1920" selected>1920 px</option>
+        <option value="1280">1280 px</option>
+        <option value="800">800 px</option>
+      </select>
+    </label>
+  </section>
+
+  <section id="drop" class="drop" tabindex="0" role="button" aria-label="Choose images">
+    <input id="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp" multiple hidden>
+    <strong>Drop images here</strong>
+    <span>or click to choose · JPG, PNG, WebP, GIF, BMP</span>
+    <button id="sample" class="ghost" type="button">Try with sample images</button>
+  </section>
+
+  <section id="summary" class="summary" hidden>
+    <div><b id="s-count">0</b><span>images</span></div>
+    <div><b id="s-before">0</b><span>before</span></div>
+    <div><b id="s-after">0</b><span>after</span></div>
+    <div class="hl"><b id="s-saved">0%</b><span>saved</span></div>
+    <div><b id="s-time">0 ms</b><span>total time</span></div>
+    <button id="zip" class="primary" type="button">Download .zip</button>
+  </section>
+
+  <ul id="list" class="list"></ul>
+</main>
+
+<div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-label="Compare before and after">
+  <div class="modal-box">
+    <button id="close" class="x" aria-label="Close">×</button>
+    <div class="cmp" id="cmp">
+      <img id="img-after" alt="After">
+      <div class="before"><img id="img-before" alt="Before"></div>
+      <span class="tag l">Before</span><span class="tag r">After</span>
+      <div class="handle" id="handle"><i></i></div>
+    </div>
+    <input id="slider" type="range" min="0" max="100" value="50" aria-label="Comparison position">
+    <p id="cmp-info" class="cmp-info"></p>
+  </div>
+</div>
+
+<footer>Built with Rust + wasm-bindgen · <span id="engine">loading engine…</span> · <a href="https://github.com/alissonlittig/pixelforge-wasm">source</a></footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
